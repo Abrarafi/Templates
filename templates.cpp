@@ -14,6 +14,16 @@ void sieve() {
   }
 }
 
+vector<int> getFactorization(int x)
+{
+    vector<int> ret;
+    while (x != 1) {
+        ret.push_back(spf[x]);
+        x = x / spf[x];
+    }
+    return ret;
+}
+
 int main()
 {
    
