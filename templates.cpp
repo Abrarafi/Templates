@@ -1,6 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long int
+#define vi vector<int>
+#define mii map<ll,ll>
+#define endl "\n"
+#define YES cout<<"YES"<<endl
+#define NO cout<<"NO"<<endl;
+
 const int N=1e5+7;
 int spf[N];
 vector<int> primes;
