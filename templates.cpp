@@ -45,6 +45,30 @@ long long binpow(long long a, long long b) {
     return res;
 }
 
+
+//Matrix multiplication:
+struct matrix{
+    int mat[4][4];
+};
+
+matrix mul_mat(matrix a,matrix b)
+{
+    matrix ans;
+    for(int row=0;row<4;row++)
+    {
+        for(int col=0;col<4;col++)
+        {
+            int var=0;
+            for(int i=0;i<4;i++)
+            {
+                var+=a.mat[row][i]*b.mat[i][col];
+            }
+            ans.mat[row][col]=var;
+        }
+    }
+    return ans;
+}
+
 int main()
 {
    
