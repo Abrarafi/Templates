@@ -7,6 +7,8 @@ using namespace std;
 #define YES cout<<"YES"<<endl
 #define NO cout<<"NO"<<endl;
 
+
+//spf
 const int N=1e5+7;
 int spf[N];
 vector<int> primes;
@@ -28,6 +30,19 @@ vector<int> getFactorization(int x)
         x = x / spf[x];
     }
     return ret;
+}
+
+
+//Binary Exponentiation:
+long long binpow(long long a, long long b) {
+    long long res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a;
+        a = a * a;
+        b >>= 1;
+    }
+    return res;
 }
 
 int main()
