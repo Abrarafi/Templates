@@ -68,6 +68,18 @@ matrix mul_mat(matrix a,matrix b)
     }
     return ans;
 }
+//Identity matrix:
+matrix identity()
+{
+    matrix I;
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+        {
+            if(i==j)I.mat[i][j]=1;
+            else I.mat[i][j]=0;
+        }
+    return I;
+}
 
 int main()
 {
