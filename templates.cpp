@@ -1,3 +1,6 @@
+//بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+//Author: Abrar_Rafi
+
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long int
