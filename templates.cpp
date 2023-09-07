@@ -9,32 +9,9 @@ using namespace std;
 #define endl "\n"
 #define YES cout<<"YES"<<endl
 #define NO cout<<"NO"<<endl;
+#define Boost ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 
-
-//spf
-const int N=1e6+7;
-int spf[N];
-vector<int> primes;
-void sieve() {
-  for(int i = 2; i < N; i++) {
-    if (spf[i] == 0) spf[i] = i, primes.push_back(i);
-    int sz = primes.size();
-    for (int j = 0; j < sz && i * primes[j] < N && primes[j] <= spf[i]; j++) {
-      spf[i * primes[j]] = primes[j];
-    }
-  }
-}
-
-vector<int> getFactorization(int x)
-{
-    vector<int> ret;
-    while (x != 1) {
-        ret.push_back(spf[x]);
-        x = x / spf[x];
-    }
-    return ret;
-}
-
+const int N=1e6+123;
 
 //Extended Euclidean
 int ext_gcd(int a,int b,int &x,int &y)
@@ -69,12 +46,13 @@ bool linearDiophantine ( int A, int B, int C, int &x, int &y ) {
 }
 
 //Binary Exponentiation:
+const int m=1e9+7;
 long long binpow(long long a, long long b) {
     long long res = 1;
     while (b > 0) {
         if (b & 1)
-            res = res * a;
-        a = a * a;
+            res = (res * a)%m;
+        a = (a * a)%m;
         b >>= 1;
     }
     return res;
@@ -116,6 +94,7 @@ matrix identity()
     return I;
 }
 
+//Sieve
 
 bitset<N> isprime;
 vector<int>prime;
@@ -142,6 +121,8 @@ void primegen(int n)
         }
     }
 }
+
+
 //prime factorization(slow code and all factors)
 vector<long long> prime_factors(long long n)
 {
@@ -195,13 +176,56 @@ int NOD(long long n)
     return ret;
 }
 
+//Sum of Divisors
+long long SOD(long long n)
+{
+    long long ret=1;
+    for(auto p:prime)
+    {
+        if(1LL*p*p>n)break;
+        if(n%p==0)
+        {
+        long long curpow=1;
+        long long cursum=1;
+
+        while(n%p==0)
+        {
+            curpow*=p;
+            cursum+=curpow;
+            n/=p;
+        }
+        ret*=cursum;
+        }
+    }
+    if(n>1)ret*=(1+n);
+    return ret;
+}
+
+//sum of NOD
+
+long long SNOD(long long n)
+{
+    int sq =sqrt(n);
+    long long ret=0;
+    for(int i=1;i<=sq;i++)
+    {
+        ret+=(n/i)-i;
+    }
+    ret*=2;
+    ret+=sq;
+    return ret;
+}
+
+const int MOD=1e6+3;
+
+inline void normal(ll &a) { a %=MOD; (a<0) && (a+=MOD); }
+inline ll modMul(ll a, ll b) { a%=MOD, b %= MOD; normal(a), normal(b); return (a*b)%MOD; }
+inline ll modAdd(ll a, ll b) { a%=MOD, b %= MOD; normal(a), normal(b); return (a+b)%MOD; }
+inline ll modSub(ll a, ll b) { a%=MOD, b %= MOD; normal(a), normal(b); a-=b; normal(a); return a; }
+inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
+inline ll modInverse(ll a) { return modPow(a, MOD-2); }
+inline ll modDiv(ll a, ll b) { return modMul(a, modInverse(b)); }
 int main()
 {
-   pfactors(20);
-   for(int i=1;i<=20;i++)
-   {
-    cout<<i<<": ";
-    for(auto u:primefactors[i])cout<<u<<" ";
-    cout<<endl;
-   }
+  cout<<SNOD(10)<<endl;
 }
