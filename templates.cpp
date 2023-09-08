@@ -216,6 +216,30 @@ long long SNOD(long long n)
     return ret;
 }
 
+//Euler phi function: (co-prime of n)
+int phi(int n)
+{
+    int ret = n;
+    for( auto p : prime)
+    {
+        if(1LL*p*p > n || n == 0) break;
+        if(n % p == 0)
+        {
+            ret /= p;
+            ret *= (p-1);
+            while(n % p == 0) n /= p;
+        }
+    }
+    if(n > 1) 
+    {
+        ret /= n;
+        ret *= (n-1);
+    }
+    return ret;
+}
+
+//modular arithmetic: 
+
 const int MOD=1e6+3;
 
 inline void normal(ll &a) { a %=MOD; (a<0) && (a+=MOD); }
@@ -225,6 +249,10 @@ inline ll modSub(ll a, ll b) { a%=MOD, b %= MOD; normal(a), normal(b); a-=b; nor
 inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
 inline ll modInverse(ll a) { return modPow(a, MOD-2); }
 inline ll modDiv(ll a, ll b) { return modMul(a, modInverse(b)); }
+
+
+
+
 int main()
 {
   cout<<SNOD(10)<<endl;
