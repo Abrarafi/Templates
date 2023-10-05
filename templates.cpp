@@ -82,11 +82,11 @@ matrix mul_mat(matrix a,matrix b)
     return ans;
 }
 //Identity matrix:
-matrix identity()
+matrix identity(int n,int m)
 {
     matrix I;
-    for(int i=0;i<4;i++)
-        for(int j=0;j<4;j++)
+    for(int i=0;i<n;i++)
+        for(int j=0;j<m;j++)
         {
             if(i==j)I.mat[i][j]=1;
             else I.mat[i][j]=0;
@@ -95,7 +95,7 @@ matrix identity()
 }
 
 //Sieve
-
+//const int N=1e6+123;
 bitset<N> isprime;
 vector<int>prime;
 
@@ -238,6 +238,29 @@ int phi(int n)
     return ret;
 }
 
+//Euler phi using harmonic series;
+
+// const int N=1e6+123;
+// int phi[N];
+// void euler_phi(int n)
+// {
+//     for(int i=1;i<=n;i++)phi[i]=i;
+//     for(int i=2;i<=n;i++)
+//     {
+//         if(phi[i]==i)
+//         {
+//             int p=i;
+//             for(int j=p;j<=n;j+=p)
+//             {
+//                 phi[j]/=p;
+//                 phi[j]*=(p-1);
+                
+//             }
+//         }
+//     }
+
+// }
+
 //modular arithmetic: 
 
 const int MOD=1e6+3;
@@ -255,5 +278,6 @@ inline ll modDiv(ll a, ll b) { return modMul(a, modInverse(b)); }
 
 int main()
 {
-  cout<<SNOD(10)<<endl;
+  primegen(1);
+  for(auto i:prime)cout<<i<<endl;
 }
